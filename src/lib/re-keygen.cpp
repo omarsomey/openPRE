@@ -29,7 +29,7 @@ void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOF
         std::cerr << "I cannot read serialization from "<< path << std::endl;
         }
         else{
-        std::cout << " Cryptocontext has been deserialized from : " << path << std::endl;
+        std::cout << "Cryptocontext has been deserialized from : " << path << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<< sertype <<std::endl;
@@ -42,14 +42,14 @@ void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOF
         std::cerr << "I cannot read serialization of private key from : "<< secretKey << std::endl;
         }
         else{
-        std::cout << " Private key has been deserialized from :  " << secretKey << std::endl;
+        std::cout << "Private key has been deserialized from :  " << secretKey << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::DeserializeFromFile(secretKey, sk, SerType::BINARY)) {
         std::cerr << "I cannot read serialization of private key from : "<< secretKey << std::endl;
         }
         else{
-        std::cout <<" Private key has been deserialized from :  "<< secretKey << std::endl;
+        std::cout <<"Private key has been deserialized from :  "<< secretKey << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<< sertype <<std::endl;
@@ -57,13 +57,12 @@ void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOF
     
     // Deserialize the public key
     PublicKey<DCRTPoly> pk;
-    std::cout << "this is the publickey path : "<<publicKey << std::endl;
     if (!strcmp(sertype, "JSON")){
         if (!Serial::DeserializeFromFile(publicKey, pk, SerType::JSON)) {
         std::cerr << "I cannot read serialization from : "<< publicKey << std::endl;
         }
         else{
-        std::cout << " Public key has been deserialized from : " << publicKey << std::endl;
+        std::cout << "Public key has been deserialized from : " << publicKey << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::DeserializeFromFile(publicKey, pk, SerType::BINARY)) {
@@ -94,14 +93,14 @@ void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOF
         std::cerr << "Error writing serialization of re-encryption key to :  "<< path<< std::endl;
         }
         else{
-        std::cout <<" re-encryption key has been serialized to JSON in : " << path << std::endl;
+        std::cout <<"Re-encryption key has been serialized to JSON in : " << path << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::SerializeToFile(path, reencryptionKey, SerType::BINARY)) {
         std::cerr << "Error writing serialization of re-encryption key to : "<< path<< std::endl;
         }
         else{
-        std::cout << " re-encryption key has been serialized to BINARY in : " << path << std::endl;
+        std::cout << "Re-encryption key has been serialized to BINARY in : " << path << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<<sertype<<std::endl;

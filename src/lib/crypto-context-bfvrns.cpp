@@ -34,8 +34,6 @@ void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, cons
     std::cout << "log2 q = " << log2(cryptoContext->GetCryptoParameters()->GetElementParams()->GetModulus().ConvertToDouble())
               << std::endl;
     std::cout << "r = " << cryptoContext->GetCryptoParameters()->GetDigitSize() << std::endl;
-    std::cout << "this is sertype : " << sertype<<std::endl;
-    std::cout << "this is comp of sertype and JSON :  " << strcmp(sertype, "JSON")<<std::endl;
     // Serialize CryptoContext
     char path[200];
     strcpy(path, CRYPTOFOLDER);

@@ -23,7 +23,7 @@ void keysGen(const char* CRYPTOFOLDER, const char* filename, const char* sertype
         std::cerr << "I cannot read serialization from "<< CRYPTOFOLDER << std::endl;
         }
         else{
-        std::cout << "Cryptocontext has been deserialized from : " << path << std::endl;
+        std::cout << "\n" << "Cryptocontext has been deserialized from : " << path << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::DeserializeFromFile(path, cryptoContext, SerType::BINARY)) {
