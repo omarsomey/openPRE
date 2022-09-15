@@ -25,14 +25,14 @@ void Encrypt(const char* publickey, const char* plaintext, const char* CCPATH, c
         std::cerr << "I cannot read serialization from "<< CCPATH << std::endl;
         }
         else{
-        std::cout << cryptoContext <<" has been deserialized " << std::endl;
+        std::cout << "Cryptocontext has been deserialized " << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::DeserializeFromFile(CCPATH, cryptoContext, SerType::BINARY)) {
         std::cerr << "I cannot read serialization from "<< CCPATH << std::endl;
         }
         else{
-        std::cout << cryptoContext << " has been deserialized " << std::endl;
+        std::cout << "Cryptocontext has been deserialized " << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<< sertype <<std::endl;
@@ -40,13 +40,12 @@ void Encrypt(const char* publickey, const char* plaintext, const char* CCPATH, c
 
     //  Deserialize the publickey
     PublicKey<DCRTPoly> pk;
-    std::cout << "this is the publickey path : "<<publickey << std::endl;
     if (!strcmp(sertype, "JSON")){
         if (!Serial::DeserializeFromFile(publickey, pk, SerType::JSON)) {
         std::cerr << "I cannot read serialization from : "<< publickey << std::endl;
         }
         else{
-        std::cout << " Public key has been deserialized from : " << publickey << std::endl;
+        std::cout << "Public key has been deserialized from : " << publickey << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::DeserializeFromFile(publickey, pk, SerType::BINARY)) {
@@ -82,7 +81,7 @@ void Encrypt(const char* publickey, const char* plaintext, const char* CCPATH, c
         std::cerr << "Error writing serialization of ciphertext from : "<< path<< std::endl;
         }
         else{
-        std::cout << " Ciphertext has been serialized to JSON in : " << path << std::endl;
+        std::cout << "Ciphertext has been serialized to JSON in : " << path << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::SerializeToFile(path, ct, SerType::BINARY)) {
