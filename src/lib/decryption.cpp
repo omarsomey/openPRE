@@ -86,7 +86,6 @@ const char* Decrypt(const char* secretKey, const char* ciphertext, const char* C
     std::cout << "Decryption time: "
               << "\t" << TOC_MS(t) << " ms" << std::endl;
     
-    std::cout << "Decrypted pLaintext is : "<< pt->GetStringValue() << std::endl;
     const char* result = pt->GetStringValue().c_str();
     return result;
     
