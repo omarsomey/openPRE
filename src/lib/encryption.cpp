@@ -25,14 +25,14 @@ void Encrypt(const char* publickey, const char* plaintext, const char* CCPATH, c
         std::cerr << "I cannot read serialization from "<< CCPATH << std::endl;
         }
         else{
-        std::cout << "Cryptocontext has been deserialized " << std::endl;
+        std::cout << "Cryptocontext has been deserialized from : " << CCPATH << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::DeserializeFromFile(CCPATH, cryptoContext, SerType::BINARY)) {
         std::cerr << "I cannot read serialization from "<< CCPATH << std::endl;
         }
         else{
-        std::cout << "Cryptocontext has been deserialized " << std::endl;
+        std::cout << "Cryptocontext has been deserialized from : " << CCPATH << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<< sertype <<std::endl;
@@ -88,7 +88,7 @@ void Encrypt(const char* publickey, const char* plaintext, const char* CCPATH, c
         std::cerr << "Error writing serialization of ciphertext from : "<< path<< std::endl;
         }
         else{
-        std::cout <<"Ciphertext has been serialized to BINARY in : " << path << std::endl;
+        std::cout << "Ciphertext has been serialized to BINARY in : " << path << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<<sertype<<std::endl;

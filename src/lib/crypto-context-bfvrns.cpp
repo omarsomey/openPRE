@@ -53,7 +53,7 @@ void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, cons
         std::cerr << "Error writing serialization of Cryptocontext "<< " to "<< path<< std::endl;
         }
         else{
-        std::cout << " has been serialized to BINARY in : " << path << std::endl;
+        std::cout << "The Cryptocontext has been serialized to BINARY in : " << path << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<<sertype<<std::endl;

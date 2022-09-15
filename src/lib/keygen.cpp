@@ -23,14 +23,14 @@ void keysGen(const char* CRYPTOFOLDER, const char* filename, const char* sertype
         std::cerr << "I cannot read serialization from "<< CRYPTOFOLDER << std::endl;
         }
         else{
-        std::cout <<" Cryptocontext has been deserialized from : " << path << std::endl;
+        std::cout << "Cryptocontext has been deserialized from : " << path << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::DeserializeFromFile(path, cryptoContext, SerType::BINARY)) {
         std::cerr << "I cannot read serialization from "<< CRYPTOFOLDER << std::endl;
         }
         else{
-        std::cout << " Cryptocontext has been deserialized from :  " << path << std::endl;
+        std::cout << "Cryptocontext has been deserialized from :  " << path << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<< sertype <<std::endl;
@@ -60,14 +60,14 @@ void keysGen(const char* CRYPTOFOLDER, const char* filename, const char* sertype
         std::cerr << "Error writing serialization of public key to :  "<< path<< std::endl;
         }
         else{
-        std::cout <<" Public key has been serialized to JSON in : " << path << std::endl;
+        std::cout << "Public key has been serialized to JSON in : " << path << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::SerializeToFile(path, keyPair.publicKey, SerType::BINARY)) {
         std::cerr << "Error writing serialization of public key to : "<< path<< std::endl;
         }
         else{
-        std::cout << "public key has been serialized to BINARY in : " << path << std::endl;
+        std::cout << "Public key has been serialized to BINARY in : " << path << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<<sertype<<std::endl;
@@ -82,14 +82,14 @@ void keysGen(const char* CRYPTOFOLDER, const char* filename, const char* sertype
         std::cerr << "Error writing serialization of private key to :  "<< path<< std::endl;
         }
         else{
-        std::cout << " Private key has been serialized to JSON in : " << path << std::endl;
+        std::cout << "Private key has been serialized to JSON in : " << path << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::SerializeToFile(path, keyPair.secretKey, SerType::BINARY)) {
         std::cerr << "Error writing serialization of private key ro :  "<< path<< std::endl;
         }
         else{
-        std::cout << " Private key has been serialized to BINARY to : " << path << std::endl;
+        std::cout << "Private key has been serialized to BINARY to : " << path << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<<sertype<<std::endl;

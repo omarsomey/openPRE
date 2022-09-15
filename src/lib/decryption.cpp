@@ -32,7 +32,7 @@ const char* Decrypt(const char* secretKey, const char* ciphertext, const char* C
         std::cerr << "I cannot read serialization from "<< CCPATH << std::endl;
         }
         else{
-        std::cout << " Cryptocontext has been deserialized from : " << CCPATH << std::endl;
+        std::cout << "Cryptocontext has been deserialized from : " << CCPATH << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<< sertype <<std::endl;
@@ -45,14 +45,14 @@ const char* Decrypt(const char* secretKey, const char* ciphertext, const char* C
         std::cerr << "I cannot read serialization of private key from : "<< secretKey << std::endl;
         }
         else{
-        std::cout << " Private key has been deserialized from :  " << secretKey << std::endl;
+        std::cout << "Private key has been deserialized from :  " << secretKey << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::DeserializeFromFile(secretKey, sk, SerType::BINARY)) {
         std::cerr << "I cannot read serialization of private key from : "<< secretKey << std::endl;
         }
         else{
-        std::cout <<" Private key has been deserialized from :  "<< secretKey << std::endl;
+        std::cout << "Private key has been deserialized from :  "<< secretKey << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<< sertype <<std::endl;
@@ -66,14 +66,14 @@ const char* Decrypt(const char* secretKey, const char* ciphertext, const char* C
         std::cerr << "I cannot read serialization of ciphertext from "<< ciphertext << std::endl;
         }
         else{
-        std::cout << " Ciphertext has been deserialized from :  " << ciphertext << std::endl;
+        std::cout << "Ciphertext has been deserialized from :  " << ciphertext << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
         if (!Serial::DeserializeFromFile(ciphertext, ct, SerType::BINARY)) {
         std::cerr << "I cannot read serialization of ciphertetx from : "<< ciphertext << std::endl;
         }
         else{
-        std::cout << " Ciphertext has been deserialized from : "<< ciphertext << std::endl;
+        std::cout << "Ciphertext has been deserialized from : "<< ciphertext << std::endl;
         }
     } else{
         std::cerr << "Error in the serialization type :"<< sertype <<std::endl;
