@@ -2,6 +2,8 @@
 
 #include "re-keygen.hpp"
 #include "openfhe.h"
+#include "cryptocontext-ser.h"
+#include "key/key-ser.h"
 
 using namespace lbcrypto;
 
@@ -78,10 +80,10 @@ void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOF
     std::cout << "\n"
               << "Generating proxy re-encryption key..." << std::endl;
 
-    EvalKey<DCRTPoly> reencryptionKey;
+    EvalKey<DCRTPoly> reEncryptionKey;
 
     TIC(t);
-    reencryptionKey = cryptoContext->ReKeyGen(sk, pk);
+    reEncryptionKey = cryptoContext->ReKeyGen(sk, pk);
     std::cout << "Re-encryption Key generation time: "
               << "\t" << TOC_MS(t) << " ms" << std::endl;
 
@@ -89,14 +91,14 @@ void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOF
     strcpy(path, CRYPTOFOLDER);
     strcat(path,filename);
     if (!strcmp(sertype, "JSON")){
-        if (!Serial::SerializeToFile(path, reencryptionKey, SerType::JSON)) {
+        if (!Serial::SerializeToFile(path, reEncryptionKey, SerType::JSON)) {
         std::cerr << "Error writing serialization of re-encryption key to :  "<< path<< std::endl;
         }
         else{
         std::cout <<"Re-encryption key has been serialized to JSON in : " << path << std::endl;
         }
     } else if (!strcmp(sertype, "BINARY")){
-        if (!Serial::SerializeToFile(path, reencryptionKey, SerType::BINARY)) {
+        if (!Serial::SerializeToFile(path, reEncryptionKey, SerType::BINARY)) {
         std::cerr << "Error writing serialization of re-encryption key to : "<< path<< std::endl;
         }
         else{
