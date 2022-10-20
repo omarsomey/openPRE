@@ -8,7 +8,7 @@
 
 using namespace lbcrypto;
 
-void cryptoContextBGVrnsGen(const char* CRYPTOFOLDER, const char* filename, const char* sertype, int plaintextModulus, int multiplicativeDepth){ 
+void cryptoContextBGVrnsGen(const char* CRYPTOFOLDER, const char* filename, int plaintextModulus, int multiplicativeDepth){ 
 
     TimeVar t;
 
@@ -38,21 +38,11 @@ void cryptoContextBGVrnsGen(const char* CRYPTOFOLDER, const char* filename, cons
     char path[200];
     strcpy(path, CRYPTOFOLDER);
     strcat(path,filename);
-    if (!strcmp(sertype, "JSON")){
-        if (!Serial::SerializeToFile(path, cryptoContext, SerType::JSON)) {
+    if (!Serial::SerializeToFile(path, cryptoContext, SerType::JSON)) {
         std::cerr << "Error writing serialization of Cryptocontext to : "<< path<< std::endl;
         }
         else{
         std::cout << "Cryptocontext has been serialized to JSON in : " << path << std::endl;
         }
-    } else if (!strcmp(sertype, "BINARY")){
-        if (!Serial::SerializeToFile(path, cryptoContext, SerType::BINARY)) {
-        std::cerr << "Error writing serialization of Cryptocontext "<< " to "<< path<< std::endl;
-        }
-        else{
-        std::cout << "The Cryptocontext has been serialized to BINARY in : " << path << std::endl;
-        }
-    } else{
-        std::cerr << "Error in the serialization type :"<<sertype<<std::endl;
-    }
+    
 }

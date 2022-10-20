@@ -8,7 +8,7 @@
 
 using namespace lbcrypto;
 
-void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, const char* sertype, int plaintextModulus, int multiplicativeDepth){
+void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, int plaintextModulus, int multiplicativeDepth){
 
     TimeVar t;
     
@@ -16,6 +16,7 @@ void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, cons
     CCParams<CryptoContextBFVRNS> parameters;
     parameters.SetMultiplicativeDepth(multiplicativeDepth);
     parameters.SetPlaintextModulus(plaintextModulus);
+
 
     TIC(t);
     CryptoContext<DCRTPoly> cryptoContext = GenCryptoContext(parameters);
@@ -29,6 +30,7 @@ void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, cons
     cryptoContext->Enable(LEVELEDSHE);
     cryptoContext->Enable(PRE);
 
+
     std::cout << "p = " << cryptoContext->GetCryptoParameters()->GetPlaintextModulus() << std::endl;
     std::cout << "n = " << cryptoContext->GetCryptoParameters()->GetElementParams()->GetCyclotomicOrder() / 2 << std::endl;
     std::cout << "log2 q = " << log2(cryptoContext->GetCryptoParameters()->GetElementParams()->GetModulus().ConvertToDouble())
@@ -39,22 +41,11 @@ void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, cons
     strcpy(path, CRYPTOFOLDER);
     strcat(path,filename);
     
-    if (!strcmp(sertype, "JSON")){
-        if (!Serial::SerializeToFile(path, cryptoContext, SerType::JSON)) {
+    if (!Serial::SerializeToFile(path, cryptoContext, SerType::JSON)) {
         std::cerr << "Error writing serialization of Cryptocontext to : "<< path<< std::endl;
         }
         else{
         std::cout << "Cryptocontext has been serialized to JSON in : " << path << std::endl;
         }
-    } else if (!strcmp(sertype, "BINARY")){
-        if (!Serial::SerializeToFile(path, cryptoContext, SerType::BINARY)) {
-        std::cerr << "Error writing serialization of Cryptocontext "<< " to "<< path<< std::endl;
-        }
-        else{
-        std::cout << "The Cryptocontext has been serialized to BINARY in : " << path << std::endl;
-        }
-    } else{
-        std::cerr << "Error in the serialization type :"<<sertype<<std::endl;
-    }
 
 }
