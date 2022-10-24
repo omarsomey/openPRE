@@ -31,7 +31,7 @@ char* ReEncrypt(const char* ciphertext, const char* reEncryptionKey, const char*
         std::cout << "Cryptocontext has been deserialized from : " << path << std::endl;
         }
 
-    char path[200];
+
     strcpy(path, CRYPTOFOLDER);
     strcat(path,reEncryptionKey);
     //  Deserialize the re-encryption key

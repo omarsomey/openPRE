@@ -31,7 +31,7 @@ char* Encrypt(const char* publickey, const char* plaintext, const char* CRYPTOFO
         std::cout << "Cryptocontext has been deserialized from : " << path << std::endl;
         }
 
-    char path[200];
+
     strcpy(path, CRYPTOFOLDER);
     strcat(path,publickey);
     //  Deserialize the publickey

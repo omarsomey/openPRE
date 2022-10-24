@@ -26,7 +26,7 @@ void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOF
         std::cout << "Cryptocontext  has been deserialized from : " << path << std::endl;
         }
 
-    char path[200];
+
     strcpy(path, CRYPTOFOLDER);
     strcat(path,secretKey);
     //  Deserialize the private key
@@ -38,7 +38,7 @@ void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOF
         std::cout << "Private key has been deserialized from :  " << path << std::endl;
         }
     
-    char path[200];
+
     strcpy(path, CRYPTOFOLDER);
     strcat(path,publicKey);
     // Deserialize the public key

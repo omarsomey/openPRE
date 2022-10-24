@@ -36,7 +36,7 @@ char* Decrypt(const char* secretKey, const char* ciphertext, const char* CRYPTOF
         }
 
 
-    char path[200];
+
     strcpy(path, CRYPTOFOLDER);
     strcat(path,secretKey);
     //  Deserialize the private key
