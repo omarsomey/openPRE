@@ -14,26 +14,33 @@ using PT = Plaintext;             // plaintext
 using vecInt  = std::vector<int64_t>;  // vector of ints
 using vecChar = std::vector<char>;     // vector of characters
 
-char* ReEncrypt(const char* ciphertext, const char* reEncryptionKey, const char* CCPATH){
+char* ReEncrypt(const char* ciphertext, const char* reEncryptionKey, const char* CRYPTOFOLDER, const char* cryptoContextFileName){
 
     TimeVar t;
 
+    char path[200];
+    strcpy(path, CRYPTOFOLDER);
+    strcat(path,cryptoContextFileName);
+
     //  Deserialize the crypto context
     CryptoContext<DCRTPoly> cryptoContext;
-    if (!Serial::DeserializeFromFile(CCPATH, cryptoContext, SerType::JSON)) {
-        std::cerr << "I cannot read serialization from "<< CCPATH << std::endl;
+    if (!Serial::DeserializeFromFile(path, cryptoContext, SerType::JSON)) {
+        std::cerr << "I cannot read serialization from "<< path << std::endl;
         }
         else{
-        std::cout << "Cryptocontext has been deserialized from : " << CCPATH << std::endl;
+        std::cout << "Cryptocontext has been deserialized from : " << path << std::endl;
         }
 
+    char path[200];
+    strcpy(path, CRYPTOFOLDER);
+    strcat(path,reEncryptionKey);
     //  Deserialize the re-encryption key
     EvalKey<DCRTPoly> rk;
-    if (!Serial::DeserializeFromFile(reEncryptionKey, rk, SerType::JSON)) {
-        std::cerr << "I cannot read serialization from : "<< reEncryptionKey << std::endl;
+    if (!Serial::DeserializeFromFile(path, rk, SerType::JSON)) {
+        std::cerr << "I cannot read serialization from : "<< path << std::endl;
         }
         else{
-        std::cout << "Re-encryption key has been deserialized from : " << reEncryptionKey << std::endl;
+        std::cout << "Re-encryption key has been deserialized from : " << path << std::endl;
         }
     //  Deserialize the Ciphertext
     CT ct;

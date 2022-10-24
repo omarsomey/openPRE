@@ -10,12 +10,12 @@ using namespace lbcrypto;
 using CT = Ciphertext<DCRTPoly>;  // ciphertext
 using PT = Plaintext;
 
-void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOFOLDER, const char* filename){
+void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOFOLDER, const char* cryptoContextFileName, const char* filename){
 
     TimeVar t;
     char path[200];
     strcpy(path, CRYPTOFOLDER);
-    strcat(path,"cryptocontext.txt");
+    strcat(path,cryptoContextFileName);
 
     //  Deserialize the crypto context
     CryptoContext<DCRTPoly> cryptoContext;
@@ -26,22 +26,28 @@ void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOF
         std::cout << "Cryptocontext  has been deserialized from : " << path << std::endl;
         }
 
+    char path[200];
+    strcpy(path, CRYPTOFOLDER);
+    strcat(path,secretKey);
     //  Deserialize the private key
     PrivateKey<DCRTPoly> sk;
-    if (!Serial::DeserializeFromFile(secretKey, sk, SerType::JSON)) {
-        std::cerr << "I cannot read serialization of private key from : "<< secretKey << std::endl;
+    if (!Serial::DeserializeFromFile(path, sk, SerType::JSON)) {
+        std::cerr << "I cannot read serialization of private key from : "<< path << std::endl;
         }
         else{
-        std::cout << "Private key has been deserialized from :  " << secretKey << std::endl;
+        std::cout << "Private key has been deserialized from :  " << path << std::endl;
         }
     
+    char path[200];
+    strcpy(path, CRYPTOFOLDER);
+    strcat(path,publicKey);
     // Deserialize the public key
     PublicKey<DCRTPoly> pk;
-    if (!Serial::DeserializeFromFile(publicKey, pk, SerType::JSON)) {
-        std::cerr << "I cannot read serialization from : "<< publicKey << std::endl;
+    if (!Serial::DeserializeFromFile(path, pk, SerType::JSON)) {
+        std::cerr << "I cannot read serialization from : "<< path << std::endl;
         }
         else{
-        std::cout << "Public key has been deserialized from : " << publicKey << std::endl;
+        std::cout << "Public key has been deserialized from : " << path << std::endl;
         }
 
     std::cout << "\n"

@@ -8,18 +8,17 @@
 using namespace lbcrypto;
 
 
-void keysGen(const char* CRYPTOFOLDER, const char* filename){
+void keysGen(const char* CRYPTOFOLDER, const char* cryptoContextFileName, const char* filename){
 
     TimeVar t;
 
     char path[200];
     strcpy(path, CRYPTOFOLDER);
-    strcat(path,"cryptocontext.txt");
-
+    strcat(path,cryptoContextFileName);
     // Deserialize the crypto context
     CryptoContext<DCRTPoly> cryptoContext;
     if (!Serial::DeserializeFromFile(path, cryptoContext, SerType::JSON)) {
-            std::cerr << "I cannot read serialization from "<< CRYPTOFOLDER << std::endl;
+            std::cerr << "I cannot read serialization from "<< path << std::endl;
         }
         else{
             std::cout << "\n" << "Cryptocontext has been deserialized from : " << path << std::endl;
@@ -44,7 +43,7 @@ void keysGen(const char* CRYPTOFOLDER, const char* filename){
     // Serialize the public key
     strcpy(path, CRYPTOFOLDER);
     strcat(path,filename);
-    strcat(path,"public-key.txt");
+    strcat(path,"public-key.json");
     if (!Serial::SerializeToFile(path, keyPair.publicKey, SerType::JSON)) {
         std::cerr << "Error writing serialization of public key to :  "<< path<< std::endl;
         }
@@ -55,7 +54,7 @@ void keysGen(const char* CRYPTOFOLDER, const char* filename){
     // Serialize the secret key
     strcpy(path, CRYPTOFOLDER);
     strcat(path,filename);
-    strcat(path,"private-key.txt");
+    strcat(path,"private-key.json");
     if (!Serial::SerializeToFile(path, keyPair.secretKey, SerType::JSON)) {
         std::cerr << "Error writing serialization of private key to :  "<< path<< std::endl;
         }

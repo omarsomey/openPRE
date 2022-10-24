@@ -14,26 +14,34 @@ using PT = Plaintext;             // plaintext
 using vecInt  = std::vector<int64_t>;  // vector of ints
 using vecChar = std::vector<char>;     // vector of characters
 
-char* Encrypt(const char* publickey, const char* plaintext, const char* CCPATH){
+char* Encrypt(const char* publickey, const char* plaintext, const char* CRYPTOFOLDER, const char* cryptoContextFileName){
 
     TimeVar t;
 
+    char path[200];
+    strcpy(path, CRYPTOFOLDER);
+    strcat(path,cryptoContextFileName);
+
     //  Deserialize the crypto context
     CryptoContext<DCRTPoly> cryptoContext;
-    if (!Serial::DeserializeFromFile(CCPATH, cryptoContext, SerType::JSON)) {
-        std::cerr << "I cannot read serialization from "<< CCPATH << std::endl;
+    if (!Serial::DeserializeFromFile(path, cryptoContext, SerType::JSON)) {
+        std::cerr << "I cannot read serialization from "<< path << std::endl;
         }
         else{
-        std::cout << "Cryptocontext has been deserialized from : " << CCPATH << std::endl;
+        std::cout << "Cryptocontext has been deserialized from : " << path << std::endl;
         }
 
+    char path[200];
+    strcpy(path, CRYPTOFOLDER);
+    strcat(path,publickey);
     //  Deserialize the publickey
+
     PublicKey<DCRTPoly> pk;
-    if (!Serial::DeserializeFromFile(publickey, pk, SerType::JSON)) {
-        std::cerr << "I cannot read serialization from : "<< publickey << std::endl;
+    if (!Serial::DeserializeFromFile(path, pk, SerType::JSON)) {
+        std::cerr << "I cannot read serialization from : "<< path << std::endl;
         }
         else{
-        std::cout << "Public key has been deserialized from : " << publickey << std::endl;
+        std::cout << "Public key has been deserialized from : " << path << std::endl;
         }
 
     //  Create a plaintext object from string input
