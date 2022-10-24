@@ -43,7 +43,7 @@ void keysGen(const char* CRYPTOFOLDER, const char* cryptoContextFileName, const 
     // Serialize the public key
     strcpy(path, CRYPTOFOLDER);
     strcat(path,filename);
-    strcat(path,"public-key.json");
+    strcat(path,"-public-key.json");
     if (!Serial::SerializeToFile(path, keyPair.publicKey, SerType::JSON)) {
         std::cerr << "Error writing serialization of public key to :  "<< path<< std::endl;
         }
@@ -54,7 +54,7 @@ void keysGen(const char* CRYPTOFOLDER, const char* cryptoContextFileName, const 
     // Serialize the secret key
     strcpy(path, CRYPTOFOLDER);
     strcat(path,filename);
-    strcat(path,"private-key.json");
+    strcat(path,"-private-key.json");
     if (!Serial::SerializeToFile(path, keyPair.secretKey, SerType::JSON)) {
         std::cerr << "Error writing serialization of private key to :  "<< path<< std::endl;
         }

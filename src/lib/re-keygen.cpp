@@ -63,6 +63,7 @@ void ReKeyGen(const char * secretKey, const char* publicKey, const char* CRYPTOF
     // Serialize the re-encryption key
     strcpy(path, CRYPTOFOLDER);
     strcat(path,filename);
+    strcat(path,"-re-enc-key.json");
     if (!Serial::SerializeToFile(path, reEncryptionKey, SerType::JSON)) {
         std::cerr << "Error writing serialization of re-encryption key to :  "<< path<< std::endl;
         }
