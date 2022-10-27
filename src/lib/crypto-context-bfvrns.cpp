@@ -14,8 +14,11 @@ void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, int 
     
   //  Set CryptoContext
     CCParams<CryptoContextBFVRNS> parameters;
-    parameters.SetMultiplicativeDepth(multiplicativeDepth);
+    // parameters.SetMultiplicativeDepth(multiplicativeDepth);
     parameters.SetPlaintextModulus(plaintextModulus);
+    parameters.SetSecurityLevel(HEStd_128_classic);
+    parameters.SetRingDim(4096);
+
 
 
     TIC(t);
@@ -36,6 +39,7 @@ void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, int 
     std::cout << "log2 q = " << log2(cryptoContext->GetCryptoParameters()->GetElementParams()->GetModulus().ConvertToDouble())
               << std::endl;
     std::cout << "r = " << cryptoContext->GetCryptoParameters()->GetDigitSize() << std::endl;
+
     // Serialize CryptoContext
     char path[200];
     strcpy(path, CRYPTOFOLDER);

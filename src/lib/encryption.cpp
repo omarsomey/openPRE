@@ -57,13 +57,27 @@ char* Encrypt(const char* publickey, const char* plaintext, const char* CRYPTOFO
     
     std::cout << "PLaintext is : "<< pt->GetStringValue() << std::endl;
     std::string result  = Serial::SerializeToString(ct);
+    
+
+    // if (!Serial::SerializeToFile("/home/somey/Desktop/omar", ct, SerType::BINARY)) {
+    //     std::cerr << "Error writing serialization of ciphertext from : "<< path<< std::endl;
+    //     }
+    //     else{
+    //     std::cout << "Ciphertext has been serialized to BINARY in : " << "/home/somey/Desktop/omar" << std::endl;
+    //     }
+    // if (!Serial::SerializeToFile("/home/somey/Desktop/omar2", ct, SerType::JSON)) {
+    //     std::cerr << "Error writing serialization of ciphertext from : "<< path<< std::endl;
+    //     }
+    //     else{
+    //     std::cout << "Ciphertext has been serialized to BINARY in : " << "/home/somey/Desktop/omar2" << std::endl;
+    //     }
 
     return strcpy(new char[result.length() + 1], result.c_str());
 
 
 
 
-
+   
     
     // Serialize ciphertext
     // char path[200];

@@ -14,8 +14,10 @@ void cryptoContextBGVrnsGen(const char* CRYPTOFOLDER, const char* filename, int 
 
   //  Set CryptoContext
     CCParams<CryptoContextBGVRNS> parameters;
-    parameters.SetMultiplicativeDepth(multiplicativeDepth);
+    //parameters.SetMultiplicativeDepth(multiplicativeDepth);
     parameters.SetPlaintextModulus(plaintextModulus);
+    parameters.SetSecurityLevel(HEStd_128_classic);
+
 
     TIC(t);
     CryptoContext<DCRTPoly> cryptoContext = GenCryptoContext(parameters);
@@ -33,7 +35,7 @@ void cryptoContextBGVrnsGen(const char* CRYPTOFOLDER, const char* filename, int 
     std::cout << "log2 q = " << log2(cryptoContext->GetCryptoParameters()->GetElementParams()->GetModulus().ConvertToDouble())
               << std::endl;
     std::cout << "r = " << cryptoContext->GetCryptoParameters()->GetDigitSize() << std::endl;
-
+    
     // Serialize CryptoContext
     char path[200];
     strcpy(path, CRYPTOFOLDER);
