@@ -14,35 +14,23 @@ using PT = Plaintext;             // plaintext
 using vecInt  = std::vector<int64_t>;  // vector of ints
 using vecChar = std::vector<char>;     // vector of characters
 
-char* Encrypt(const char* publickey, const char* plaintext, const char* CRYPTOFOLDER, const char* cryptoContextFileName){
+void Encrypt(const char* publickey, const char* plaintext, const char* destinationPath){
 
     TimeVar t;
 
-    char path[200];
-    strcpy(path, CRYPTOFOLDER);
-    strcat(path,cryptoContextFileName);
-
-    //  Deserialize the crypto context
-    CryptoContext<DCRTPoly> cryptoContext;
-    if (!Serial::DeserializeFromFile(path, cryptoContext, SerType::JSON)) {
-        std::cerr << "I cannot read serialization from "<< path << std::endl;
-        }
-        else{
-        std::cout << "Cryptocontext has been deserialized from : " << path << std::endl;
-        }
-
-
-    strcpy(path, CRYPTOFOLDER);
-    strcat(path,publickey);
     //  Deserialize the publickey
-
     PublicKey<DCRTPoly> pk;
-    if (!Serial::DeserializeFromFile(path, pk, SerType::JSON)) {
-        std::cerr << "I cannot read serialization from : "<< path << std::endl;
+    if (!Serial::DeserializeFromFile(publickey, pk, SerType::BINARY)) {
+        std::cerr << "I cannot read serialization of Public key from : "<< publickey << std::endl;
         }
         else{
-        std::cout << "Public key has been deserialized from : " << path << std::endl;
+        std::cout << "Public key has been deserialized from : " << publickey << std::endl;
         }
+
+    // Get the crypto context from pk
+    CryptoContext<DCRTPoly> cryptoContext;
+    cryptoContext = pk.get()->GetCryptoContext();
+
 
     //  Create a plaintext object from string input
     std::string strplaintext = plaintext;
@@ -56,23 +44,16 @@ char* Encrypt(const char* publickey, const char* plaintext, const char* CRYPTOFO
               << "\t" << TOC_MS(t) << " ms" << std::endl;
     
     std::cout << "PLaintext is : "<< pt->GetStringValue() << std::endl;
-    std::string result  = Serial::SerializeToString(ct);
-    
 
-    // if (!Serial::SerializeToFile("/home/somey/Desktop/omar", ct, SerType::BINARY)) {
-    //     std::cerr << "Error writing serialization of ciphertext from : "<< path<< std::endl;
-    //     }
-    //     else{
-    //     std::cout << "Ciphertext has been serialized to BINARY in : " << "/home/somey/Desktop/omar" << std::endl;
-    //     }
-    // if (!Serial::SerializeToFile("/home/somey/Desktop/omar2", ct, SerType::JSON)) {
-    //     std::cerr << "Error writing serialization of ciphertext from : "<< path<< std::endl;
-    //     }
-    //     else{
-    //     std::cout << "Ciphertext has been serialized to BINARY in : " << "/home/somey/Desktop/omar2" << std::endl;
-    //     }
+    // Serialize ciphertext in BINARY
 
-    return strcpy(new char[result.length() + 1], result.c_str());
+    if (!Serial::SerializeToFile(destinationPath, ct, SerType::BINARY)) {
+        std::cerr << "Error writing serialization of ciphertext from : "<< destinationPath<< std::endl;
+        }
+        else{
+        std::cout << "Ciphertext has been serialized to BINARY in : " << destinationPath << std::endl;
+        }
+
 
 
 
@@ -83,12 +64,12 @@ char* Encrypt(const char* publickey, const char* plaintext, const char* CRYPTOFO
     // char path[200];
     // strcpy(path, destinationPath);
     // strcat(path,filename);
-    // if (!strcmp(sertype, "JSON")){
-    //     if (!Serial::SerializeToFile(path, ct, SerType::JSON)) {
+    // if (!strcmp(sertype, "BINARY")){
+    //     if (!Serial::SerializeToFile(path, ct, SerType::BINARY)) {
     //     std::cerr << "Error writing serialization of ciphertext from : "<< path<< std::endl;
     //     }
     //     else{
-    //     std::cout << "Ciphertext has been serialized to JSON in : " << path << std::endl;
+    //     std::cout << "Ciphertext has been serialized to BINARY in : " << path << std::endl;
     //     }
     // } else if (!strcmp(sertype, "BINARY")){
     //     if (!Serial::SerializeToFile(path, ct, SerType::BINARY)) {

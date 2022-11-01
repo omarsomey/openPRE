@@ -8,20 +8,17 @@
 using namespace lbcrypto;
 
 
-void keysGen(const char* CRYPTOFOLDER, const char* cryptoContextFileName, const char* filename){
+void keysGen(const char* cryptoContextPath, const char* destinationPath){
 
     TimeVar t;
-
     char path[200];
-    strcpy(path, CRYPTOFOLDER);
-    strcat(path,cryptoContextFileName);
     // Deserialize the crypto context
     CryptoContext<DCRTPoly> cryptoContext;
-    if (!Serial::DeserializeFromFile(path, cryptoContext, SerType::JSON)) {
-            std::cerr << "I cannot read serialization from "<< path << std::endl;
+    if (!Serial::DeserializeFromFile(cryptoContextPath, cryptoContext, SerType::BINARY)) {
+            std::cerr << "I cannot read serialization from "<< cryptoContextPath << std::endl;
         }
         else{
-            std::cout << "\n" << "Cryptocontext has been deserialized from : " << path << std::endl;
+            std::cout << "\n" << "Cryptocontext has been deserialized from : " << cryptoContextPath << std::endl;
         }
     
     
@@ -41,24 +38,22 @@ void keysGen(const char* CRYPTOFOLDER, const char* cryptoContextFileName, const 
     // Serialize key pairs
 
     // Serialize the public key
-    strcpy(path, CRYPTOFOLDER);
-    strcat(path,filename);
-    strcat(path,"-public-key.json");
-    if (!Serial::SerializeToFile(path, keyPair.publicKey, SerType::JSON)) {
+    strcpy(path, destinationPath);
+    strcat(path,"-public-key");
+    if (!Serial::SerializeToFile(path, keyPair.publicKey, SerType::BINARY)) {
         std::cerr << "Error writing serialization of public key to :  "<< path<< std::endl;
         }
         else{
-        std::cout << "Public key has been serialized to JSON in : " << path << std::endl;
+        std::cout << "Public key has been serialized to BINARY in : " << path << std::endl;
         }
     
     // Serialize the secret key
-    strcpy(path, CRYPTOFOLDER);
-    strcat(path,filename);
-    strcat(path,"-private-key.json");
-    if (!Serial::SerializeToFile(path, keyPair.secretKey, SerType::JSON)) {
+    strcpy(path, destinationPath);
+    strcat(path,"-private-key");
+    if (!Serial::SerializeToFile(path, keyPair.secretKey, SerType::BINARY)) {
         std::cerr << "Error writing serialization of private key to :  "<< path<< std::endl;
         }
         else{
-        std::cout << "Private key has been serialized to JSON in : " << path << std::endl;
+        std::cout << "Private key has been serialized to BINARY in : " << path << std::endl;
         }
 }

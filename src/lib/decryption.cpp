@@ -19,43 +19,34 @@ using PT = Plaintext;             // plaintext
 using vecInt  = std::vector<int64_t>;  // vector of ints
 using vecChar = std::vector<char>;     // vector of characters
 
-char* Decrypt(const char* secretKey, const char* ciphertext, const char* CRYPTOFOLDER, const char* cryptoContextFileName){
+char* Decrypt(const char* secretKey, const char* ciphertext){
 
     TimeVar t;
 
-    char path[200];
-    strcpy(path, CRYPTOFOLDER);
-    strcat(path,cryptoContextFileName);
-    //  Deserialize the crypto context
-    CryptoContext<DCRTPoly> cryptoContext;
-    if (!Serial::DeserializeFromFile(path, cryptoContext, SerType::JSON)) {
-        std::cerr << "I cannot read serialization from "<< path << std::endl;
-        }
-        else{
-        std::cout << "Cryptocontext  has been deserialized from : " << path << std::endl;
-        }
-
-
-
-    strcpy(path, CRYPTOFOLDER);
-    strcat(path,secretKey);
-    //  Deserialize the private key
+    // Deserialize the private key
     PrivateKey<DCRTPoly> sk;
-    if (!Serial::DeserializeFromFile(path, sk, SerType::JSON)) {
-        std::cerr << "I cannot read serialization of private key from : "<< path << std::endl;
+    if (!Serial::DeserializeFromFile(secretKey, sk, SerType::BINARY)) {
+        std::cerr << "I cannot read serialization of private key from : "<< secretKey << std::endl;
         }
         else{
-        std::cout << "Private key has been deserialized from :  " << path << std::endl;
+        std::cout << "Private key has been deserialized from :  " << secretKey << std::endl;
         }
+    // Get the Crypto Context from secret key
+    CryptoContext<DCRTPoly> cryptoContext;
+    cryptoContext = sk.get()->GetCryptoContext();
 
-    //  Deserialize the ciphertext
+
     CT ct;
     PT pt;
-    std::string c =ciphertext; 
-    std::stringstream ss(c);
-    Serial::Deserialize(ct, ss, SerType::JSON);
 
+    //  Deserialize the ciphertext
 
+    if (!Serial::DeserializeFromFile(ciphertext, ct, SerType::BINARY)) {
+        std::cerr << "I cannot read serialization of Ciphertext from : "<< ciphertext << std::endl;
+        }
+        else{
+        std::cout << "Ciphertext has been deserialized from :  " << ciphertext << std::endl;
+        }
 
     //  Decryption
     TIC(t);

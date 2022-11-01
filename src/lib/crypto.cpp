@@ -8,12 +8,12 @@
 using namespace lbcrypto;
 
 
-void cryptoContextGen(const char* schemeName, const char* CRYPTOFOLDER, const char* filename, int plaintextModulus, int multiplicativeDepth){
+void cryptoContextGen(const char* schemeName, const char* CRYPTOFOLDER, const char* filename, int plaintextModulus){
     if (!strcmp(schemeName, "BGV")){
-        cryptoContextBGVrnsGen(CRYPTOFOLDER, filename, plaintextModulus, multiplicativeDepth);
+        cryptoContextBGVrnsGen(CRYPTOFOLDER, filename, plaintextModulus);
     }
     else if (!strcmp(schemeName, "BFV")){
-        cryptoContextBFVrnsGen(CRYPTOFOLDER, filename, plaintextModulus, multiplicativeDepth);
+        cryptoContextBFVrnsGen(CRYPTOFOLDER, filename, plaintextModulus);
     }
     else{
         std::cerr << "Scheme Error: Undefined scheme name"

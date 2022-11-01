@@ -8,13 +8,12 @@
 
 using namespace lbcrypto;
 
-void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, int plaintextModulus, int multiplicativeDepth){
+void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, int plaintextModulus){
 
     TimeVar t;
     
   //  Set CryptoContext
     CCParams<CryptoContextBFVRNS> parameters;
-    // parameters.SetMultiplicativeDepth(multiplicativeDepth);
     parameters.SetPlaintextModulus(plaintextModulus);
     parameters.SetSecurityLevel(HEStd_128_classic);
     parameters.SetRingDim(4096);
@@ -45,11 +44,11 @@ void cryptoContextBFVrnsGen(const char* CRYPTOFOLDER, const char* filename, int 
     strcpy(path, CRYPTOFOLDER);
     strcat(path,filename);
     
-    if (!Serial::SerializeToFile(path, cryptoContext, SerType::JSON)) {
+    if (!Serial::SerializeToFile(path, cryptoContext, SerType::BINARY)) {
         std::cerr << "Error writing serialization of Cryptocontext to : "<< path<< std::endl;
         }
         else{
-        std::cout << "Cryptocontext has been serialized to JSON in : " << path << std::endl;
+        std::cout << "Cryptocontext has been serialized to BINARY in : " << path << std::endl;
         }
 
 }
