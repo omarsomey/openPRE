@@ -1,3 +1,3 @@
 extern "C" {
-    void ReKeyGen(const char * secretKey, const char* publicKey, const char* destinationPath);
+    void reKeyGen(const char * secretKey, const char* publicKey, const char* destinationPath);
 }
