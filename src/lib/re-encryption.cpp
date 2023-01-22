@@ -20,11 +20,9 @@ void reEncrypt(const char* ciphertext, const char* reEncryptionKey, const char* 
     if (!Serial::DeserializeFromFile(reEncryptionKey, rk, SerType::BINARY)) {
         std::cerr << "I cannot read serialization from : "<< reEncryptionKey << std::endl;
         }
-
     // Get the crypto context from re encryption key
     CryptoContext<DCRTPoly> cryptoContext;
     cryptoContext = rk.get()->GetCryptoContext();
-
     //  Deserialize the Ciphertext
     CT ct;
     if (!Serial::DeserializeFromFile(ciphertext, ct, SerType::BINARY)) {

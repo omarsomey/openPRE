@@ -8,7 +8,12 @@
 using namespace lbcrypto;
 
 
-void cryptoContextGen(const char* schemeName, const char* CRYPTOFOLDER, const char* filename, int plaintextModulus, int ringDimension, const char* securityLevel){
+void cryptoContextGen(const char* schemeName,
+ const char* CRYPTOFOLDER,
+  const char* filename,
+   int plaintextModulus,
+    int ringDimension,
+     const char* securityLevel){
     if (!strcmp(schemeName, "BGV")){
         cryptoContextBGVrnsGen(CRYPTOFOLDER, filename, plaintextModulus, ringDimension, securityLevel);
     }

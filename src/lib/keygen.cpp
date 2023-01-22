@@ -14,13 +14,10 @@ void keysGen(const char* cryptoContextPath, const char* destinationPath){
     if (!Serial::DeserializeFromFile(cryptoContextPath, cryptoContext, SerType::BINARY)) {
             std::cerr << "I cannot read serialization from "<< cryptoContextPath << std::endl;
         }
-
     // Initialize Key Pair Containers
     KeyPair<DCRTPoly> keyPair;
-
     // Generate a public/private key pair 
     keyPair = cryptoContext->KeyGen();
-
     // Serialize the public key
     char path[200];
     strcpy(path, destinationPath);
@@ -28,7 +25,6 @@ void keysGen(const char* cryptoContextPath, const char* destinationPath){
     if (!Serial::SerializeToFile(path, keyPair.publicKey, SerType::BINARY)) {
         std::cerr << "Error writing serialization of public key to :  "<< path<< std::endl;
         }
-
     // Serialize the secret key
     strcpy(path, destinationPath);
     strcat(path,"-private-key");

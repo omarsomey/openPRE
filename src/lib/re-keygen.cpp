@@ -19,7 +19,6 @@ void reKeyGen(const char * secretKey, const char* publicKey, const char* destina
     // Get the crypto Context from secret key
     CryptoContext<DCRTPoly> cryptoContext;
     cryptoContext = sk.get()->GetCryptoContext();
-
     // Deserialize the public key
     PublicKey<DCRTPoly> pk;
     if (!Serial::DeserializeFromFile(publicKey, pk, SerType::BINARY)) {
@@ -27,11 +26,8 @@ void reKeyGen(const char * secretKey, const char* publicKey, const char* destina
         }
 
     EvalKey<DCRTPoly> reEncryptionKey;
-
     // Generate Re Encryption Key
     reEncryptionKey = cryptoContext->ReKeyGen(sk, pk);
-
-
     // Serialize the re-encryption key
     char path[200];
     strcpy(path, destinationPath);
